@@ -1,0 +1,31 @@
+{
+  "name": "ng-print",
+  "version": "0.1.0",
+  "description": "Angular module for creating PDF documents out of web templates. Print your page straight to PDF, or prepare special template of printing your websites, straight in HTML and CSS.Angular module for creating PDF documents out of web templates. Print your page straight to PDF, or prepare special template of printing your websites, straight in HTML and CSS.",
+  "main": "dist/ngPrint.min.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "karma start karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bhaal275/ng-print.git"
+  },
+  "author": "Dominik Deren <dominik.deren@live.com>",
+  "license": "GPLv2",
+  "bugs": {
+    "url": "https://github.com/bhaal275/ng-print/issues"
+  },
+  "homepage": "https://github.com/bhaal275/ng-print",
+  "devDependencies": {
+    "del": "^0.1.2",
+    "gulp": "^3.8.7",
+    "gulp-concat": "^2.3.4",
+    "gulp-rimraf": "^0.1.0",
+    "gulp-sourcemaps": "^1.1.3",
+    "gulp-uglify": "^0.3.2",
+    "rimraf": "^2.2.8"
+  }
+}
