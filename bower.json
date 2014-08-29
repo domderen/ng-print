@@ -19,7 +19,7 @@
       "package.json",
       "gulpfile.js",
       ".travis.yml",
-      "karma-conf.js",
+      "karma.conf.js",
       "karma-init.js"
   ],
   "dependencies": {
