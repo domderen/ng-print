@@ -5,19 +5,20 @@
   "authors": [
     "bhaal275 <dominik.deren@windowslive.com>"
   ],
-  "description": "Angular module for creating PDF documents out of web templates. Print your page straight to PDF, or prepare special template of printing your websites, straight in HTML and CSS.Angular module for creating PDF documents out of web templates. Print your page straight to PDF, or prepare special template of printing your websites, straight in HTML and CSS.",
+  "description": "Angular module for creating PDF documents out of web templates. Print your page straight to PDF, or prepare special template of printing your websites, straight in HTML and CSS.",
   "main": "dist/ngPrint.min.js",
   "license": "GPLv2",
   "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests",
-    "examples",
-    "src",
-    "package.json",
-    "gulpfile.js"
+      "**/.*",
+      "node_modules",
+      "bower_components",
+      "test",
+      "tests",
+      "examples",
+      "src",
+      "package.json",
+      "gulpfile.js",
+      ".travis.yml"
   ],
   "dependencies": {
     "html2canvas": "~0.4.1",

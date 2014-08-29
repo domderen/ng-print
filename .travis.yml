@@ -6,3 +6,4 @@ before_install:
  - "npm install karma-cli -g"
  - "npm install bower -g"
  - "bower install"
+ script: "npm run test-single-run"
