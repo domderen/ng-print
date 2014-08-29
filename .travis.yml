@@ -6,4 +6,5 @@ before_install:
  - "npm install"
  - "npm install karma -g"
  - "npm install karma-cli -g"
+ - "npm install bower -g"
  - "bower install"
