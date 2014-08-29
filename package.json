@@ -26,6 +26,8 @@
     "gulp-rimraf": "^0.1.0",
     "gulp-sourcemaps": "^1.1.3",
     "gulp-uglify": "^0.3.2",
+    "jasmine": "^2.0.1",
+    "karma": "^0.12.23",
     "rimraf": "^2.2.8"
   }
 }
