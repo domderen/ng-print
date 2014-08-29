@@ -8,7 +8,8 @@ ngPrint.directive('ngPrintButton', ['$window', 'pdfPrinter', function ($window, 
 		restrict: 'AC',
 		require: '^ngPrintable',
 		scope: {
-			printWholePage: '&?'
+			printWholePage: '&?',
+            saveAs: '@?'
 		},
 		link: function ($scope, element, attr, ngPrintableController) {
 			var getConfigAttributes = function (element) {
@@ -30,7 +31,17 @@ ngPrint.directive('ngPrintButton', ['$window', 'pdfPrinter', function ($window, 
 
 				if (element) {
 					var config = getConfigAttributes(element);
-					pdfPrinter.generatePdfFromElement(element, config.orientation, config.unit, config.format);
+					var promise = pdfPrinter.generatePdfFromElement(element, config.orientation, config.unit, config.format);
+                    
+                    promise.then(function (pdf) {
+                        if($scope.saveAs) {
+                            pdf.save($scope.saveAs);
+                        } else {
+                            pdf.output('dataurlnewwindow');
+                        }
+
+                        pdf = null;
+                    });
 				} else {
 					throw new SyntaxError('No template element provided. Try using ngPrintable directive.');
 				}

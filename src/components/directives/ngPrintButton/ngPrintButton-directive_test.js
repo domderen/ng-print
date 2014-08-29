@@ -4,15 +4,17 @@ describe('ngPrintButton-directive', function () {
 	beforeEach(module('ngPrint'));
 
 	describe('ngPrintButton link', function () {
-		var $rootScope, $compile, $scope, pdfPrinter;
+		var $rootScope, $compile, $scope, pdfPrinter, resourceMock, pdfPromise;
 
-		beforeEach(inject(function (_$rootScope_, _$compile_, _pdfPrinter_) {
+		beforeEach(inject(function (_$rootScope_, _$compile_, _pdfPrinter_, _resourceMock_) {
 			$rootScope = _$rootScope_;
 			$compile  = _$compile_;
 			$scope = $rootScope.$new();
             pdfPrinter = _pdfPrinter_;
-            
-            spyOn(pdfPrinter, 'generatePdfFromElement');
+            resourceMock = _resourceMock_;
+
+            pdfPromise = resourceMock();
+            spyOn(pdfPrinter, 'generatePdfFromElement').and.returnValue(pdfPromise.promise);
 		}));
 
 		it('should assign click handler on link', function () {
@@ -61,6 +63,54 @@ describe('ngPrintButton-directive', function () {
                 scope.print();
 
                 expect(pdfPrinter.generatePdfFromElement).toHaveBeenCalledWith(jasmine.any(Object), 'someOrientation', 'someUnit', 'someFormat');
+            });
+            
+            it('should invoke pdf generation service and output the document afterwards', function () {
+                var el = $compile('<div ng-printable><button ng-print-button></button></div>')($scope);
+                $scope.$digest();
+
+                var button = el.find('button');
+                var scope = button.isolateScope();
+
+                scope.print();
+
+                expect(pdfPrinter.generatePdfFromElement).toHaveBeenCalledWith(jasmine.any(Object), 'p', 'pt', 'a4');
+                
+                var pdfMock = {
+                    output: function () {},
+                    save: function () {}
+                };
+                spyOn(pdfMock, 'output');
+                spyOn(pdfMock, 'save');
+  
+                pdfPromise.resolve(pdfMock);
+                $rootScope.$digest();
+                
+                expect(pdfMock.output).toHaveBeenCalledWith('dataurlnewwindow');
+            });
+            
+            it('should invoke pdf generation service and save the document as "printout.pdf" afterwards', function () {
+                var el = $compile('<div ng-printable><button ng-print-button save-as="printout.pdf"></button></div>')($scope);
+                $scope.$digest();
+
+                var button = el.find('button');
+                var scope = button.isolateScope();
+
+                scope.print();
+
+                expect(pdfPrinter.generatePdfFromElement).toHaveBeenCalledWith(jasmine.any(Object), 'p', 'pt', 'a4');
+                
+                var pdfMock = {
+                    output: function () {},
+                    save: function () {}
+                };
+                spyOn(pdfMock, 'output');
+                spyOn(pdfMock, 'save');
+  
+                pdfPromise.resolve(pdfMock);
+                $rootScope.$digest();
+                
+                expect(pdfMock.save).toHaveBeenCalledWith('printout.pdf');
             });
         });
 	});
