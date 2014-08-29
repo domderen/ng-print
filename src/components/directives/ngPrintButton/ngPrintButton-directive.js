@@ -1,7 +1,9 @@
 /*global ngPrint*/
-'use strict';
+
 
 ngPrint.directive('ngPrintButton', ['$window', 'pdfPrinter', function ($window, pdfPrinter) {
+    'use strict';
+    
 	return {
 		restrict: 'AC',
 		require: '^ngPrintable',
@@ -11,23 +13,22 @@ ngPrint.directive('ngPrintButton', ['$window', 'pdfPrinter', function ($window, 
 		link: function ($scope, element, attr, ngPrintableController) {
 			var getConfigAttributes = function (element) {
 				return {
-					orientation: element.attributes['orientation'] ? element.attributes['orientation'].value : 'p',
-					unit: element.attributes['unit'] ? element.attributes['unit'].value : 'pt',
-					format: element.attributes['format'] ? element.attributes['format'].value : 'a4'
+					orientation: element[0].attributes['orientation'] ? element[0].attributes['orientation'].value : 'p',
+					unit: element[0].attributes['unit'] ? element[0].attributes['unit'].value : 'pt',
+					format: element[0].attributes['format'] ? element[0].attributes['format'].value : 'a4'
 				};
 			};
-
 
 			$scope.print = function () {
 				var element;
 
-				if($scope.printWholePage) {
+				if ($scope.printWholePage()) {
 					element = $window.document.body;
-				} else if(ngPrintableController) {
-					element = ngPrintableController.element;
+				} else if (ngPrintableController) {
+					element = ngPrintableController.getElement();
 				}
 
-				if(element) {
+				if (element) {
 					var config = getConfigAttributes(element);
 					pdfPrinter.generatePdfFromElement(element, config.orientation, config.unit, config.format);
 				} else {
@@ -35,7 +36,9 @@ ngPrint.directive('ngPrintButton', ['$window', 'pdfPrinter', function ($window, 
 				}
 			};
 
-			element.on('click', $scope.print);
+			element.on('click', function () {
+                $scope.print();
+            });
 		}
 	};
 }]);
