@@ -15,7 +15,9 @@
     "test",
     "tests",
     "examples",
-    "src"
+    "src",
+    "package.json",
+    "gulpfile.js"
   ],
   "dependencies": {
     "html2canvas": "~0.4.1",
