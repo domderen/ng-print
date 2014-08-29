@@ -6,7 +6,7 @@ before_install:
  - "npm install karma-cli -g"
  - "npm install bower -g"
  - "bower install"
- - "gulp"
+ - "npm install gulp"
 script: 
  - "npm run test-single-run"
  - "gulp"
