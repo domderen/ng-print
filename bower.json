@@ -18,7 +18,9 @@
       "src",
       "package.json",
       "gulpfile.js",
-      ".travis.yml"
+      ".travis.yml",
+      "karma-conf.js",
+      "karma-init.js"
   ],
   "dependencies": {
     "html2canvas": "~0.4.1",
