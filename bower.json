@@ -24,7 +24,6 @@
     "html2canvas": "~0.4.1",
     "jspdf": "~1.0.178",
     "angularjs": "~1.2.23",
-    "pixastic-standalone": "*",
     "pixastic-crop": "*"
   },
   "devDependencies": {
