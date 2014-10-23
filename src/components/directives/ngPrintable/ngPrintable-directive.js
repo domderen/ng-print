@@ -13,10 +13,10 @@ ngPrint.directive('ngPrintable', [function () {
 		link: function ($scope, element) {
 			$scope.element = element;
 		},
-        controller: function ($scope) {
+        controller: ['$scope', function ($scope) {
             this.getElement = function () {
                 return $scope.element;
             };
-        }
+        }]
     };
 }]);
